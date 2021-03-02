@@ -1,13 +1,20 @@
 // import component
+import { isEmpty, inArray } from "@qingbing/helper";
 import hljs from 'highlight.js';
-// import style
-import 'highlight.js/styles/tomorrow-night.css';
 import "./line.css";
-// highlight install
+import codeStyles from "./codeStyle";
 const install = function (Vue) {
   Vue.directive('highlight', {
     deep: true,
     bind(el, binding) {
+      // 动态加入样式
+      let codeStyle = 'tomorrow-night';
+      if (!isEmpty(binding.arg) && (inArray(binding.arg, codeStyles))) {
+        codeStyle = binding.arg;
+      }
+      import(`highlight.js/styles/${codeStyle}.css`).then(item => {
+      });
+
       // on first bind, highlight all targets
       let targets = el.querySelectorAll('code');
 
@@ -23,6 +30,14 @@ const install = function (Vue) {
       })
     },
     componentUpdated(el, binding) {
+      // 动态加入样式
+      let codeStyle = 'tomorrow-night';
+      if (!isEmpty(binding.arg) && (inArray(binding.arg, codeStyles))) {
+        codeStyle = binding.arg;
+      }
+      import(`highlight.js/styles/${codeStyle}.css`).then(item => {
+      });
+
       // after an update, re-fill the content and then highlight
       let targets = el.querySelectorAll('code');
 
