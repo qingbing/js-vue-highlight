@@ -1,6 +1,6 @@
 {
   "name": "@qingbing/vue-highlight",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "封装 vue-element-ui 的代码高亮，使用指令 directive",
   "main": "src/index.js",
   "scripts": {

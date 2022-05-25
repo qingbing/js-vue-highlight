@@ -1,5 +1,5 @@
 // import component
-import { isEmpty, inArray } from "@qingbing/helper";
+import { isEmpty } from "@qingbing/helper";
 import hljs from 'highlight.js';
 import "./line.css";
 import codeStyles from "./codeStyle";
@@ -9,7 +9,7 @@ const install = function (Vue) {
     bind(el, binding) {
       // 动态加入样式
       let codeStyle = 'tomorrow-night';
-      if (!isEmpty(binding.arg) && (inArray(binding.arg, codeStyles))) {
+      if (!isEmpty(binding.arg) && (codeStyles.isElement(binding.arg))) {
         codeStyle = binding.arg;
       }
       import(`highlight.js/styles/${codeStyle}.css`).then(item => {
@@ -32,7 +32,7 @@ const install = function (Vue) {
     componentUpdated(el, binding) {
       // 动态加入样式
       let codeStyle = 'tomorrow-night';
-      if (!isEmpty(binding.arg) && (inArray(binding.arg, codeStyles))) {
+      if (!isEmpty(binding.arg) && (codeStyles.isElement(binding.arg))) {
         codeStyle = binding.arg;
       }
       import(`highlight.js/styles/${codeStyle}.css`).then(item => {
